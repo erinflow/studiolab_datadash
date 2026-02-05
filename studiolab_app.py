@@ -307,7 +307,7 @@ with tab_mr:
             mr["Month"] = mr["Date"].dt.to_period("M").apply(lambda x: x.to_timestamp())
             cum_mach = mr.groupby(["Month", "Machine"]).size().unstack(fill_value=0).cumsum().stack().reset_index(name="Cumulative")
             fig13, ax13 = plt.subplots()
-            sns.lineplot(data=cum_mach, x="Month", y="Cumulative", hue="Machine", ax=ax13)
+            sns.lineplot(data=cum_mach, x="Month", y="Cumulative", hue="Machine", palette=['C0', 'C3'], ax=ax13)
             ax13.set_title("Cumulative Machine Use by Type")
             plt.xticks(rotation=45)
             plt.tight_layout()
