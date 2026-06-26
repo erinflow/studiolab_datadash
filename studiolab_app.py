@@ -149,7 +149,7 @@ h3 {
 """, unsafe_allow_html=True)
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("StudioLab Data Dashboard")
+st.title("🦾 StudioLab Data Dashboard")
 st.markdown(
     "<p style='color:#A3ABB3; font-size:0.95rem; margin-top:-0.5rem;'>"
     "ID card check-ins · MPU event attendance · Machine reservations"
