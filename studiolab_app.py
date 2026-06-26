@@ -6,7 +6,7 @@ import seaborn as sns
 import numpy as np
 
 # ── Page config ──────────────────────────────────────────────────────────────
-st.set_page_config(page_title="StudioLab Data Dashboard", layout="wide")
+st.set_page_config(page_title="🦾 StudioLab Data Dashboard", layout="wide")
 
 # ── CST brand palette ─────────────────────────────────────────────────────────
 CST = {
