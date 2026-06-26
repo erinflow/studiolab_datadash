@@ -32,6 +32,11 @@ CST_CMAP = mcolors.LinearSegmentedColormap.from_list(
     "cst_seq", [CST["ghost"], CST["lavender"], CST["purple"], CST["navy"]]
 )
 
+
+def cst_colors(n):
+    """Return n brand colors, cycling through the CST palette."""
+    return [CST_PALETTE[i % len(CST_PALETTE)] for i in range(n)]
+
 # ── Global matplotlib style ───────────────────────────────────────────────────
 plt.rcParams.update({
     "figure.dpi":         150,
@@ -294,9 +299,7 @@ with tab_att:
     with mid_c1:
         by_dow = att_clean.groupby("dow").size().reindex(order_dow).reset_index(name="Count")
         fig2, ax2 = plt.subplots(figsize=(7, 4))
-        bars = ax2.bar(by_dow["dow"], by_dow["Count"],
-                       color=[CST["red"] if i == by_dow["Count"].idxmax() else CST["light_gray"]
-                              for i in range(len(by_dow))])
+        ax2.bar(by_dow["dow"], by_dow["Count"], color=cst_colors(len(by_dow)))
         ax2.set_title("Check-ins by Day of Week")
         ax2.set_xlabel("")
         plt.xticks(rotation=40, ha="right")
@@ -307,9 +310,7 @@ with tab_att:
     with mid_c2:
         by_hr = att_clean.groupby("Hour").size().reset_index(name="Count")
         fig3, ax3 = plt.subplots(figsize=(7, 4))
-        ax3.bar(by_hr["Hour"], by_hr["Count"],
-                color=[CST["red"] if v == by_hr["Count"].max() else CST["light_gray"]
-                       for v in by_hr["Count"]])
+        ax3.bar(by_hr["Hour"], by_hr["Count"], color=cst_colors(len(by_hr)))
         ax3.set_title("Check-ins by Hour")
         ax3.set_xlabel("Hour (24h)")
         plt.tight_layout()
@@ -523,7 +524,7 @@ with tab_summary:
     ax12.set_ylabel("Count")
     ax12.set_xlabel("")
     plt.xticks(rotation=45, ha="right")
-    ax12.legend(loc="upper left", ncol=2)
+    ax12.legend(loc="upper right", ncol=2)
     plt.tight_layout()
     st.pyplot(fig12, clear_figure=True, use_container_width=True)
     plt.close(fig12)
